@@ -19,7 +19,11 @@ export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
-        <Link to="/" className={styles.logo}>
+        <Link
+          to="/"
+          className={styles.logo}
+          onClick={() => setIsMenuOpen(false)}
+        >
           <img src="/icons/Logo.svg" alt="Nice Gadgets Logo" />
         </Link>
 
@@ -34,7 +38,9 @@ export const Header: React.FC = () => {
           </>
         )}
       </div>
-      {matches && <MobileMenu isMenuOpen={isMenuOpen} />}
+      {matches && (
+        <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      )}
     </header>
   );
 };

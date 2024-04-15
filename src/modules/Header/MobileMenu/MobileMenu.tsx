@@ -7,9 +7,10 @@ import styles from './MobileMenu.module.scss';
 
 interface Props {
   isMenuOpen: boolean;
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const MobileMenu: React.FC<Props> = ({ isMenuOpen }) => {
+export const MobileMenu: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
   const nodeRef = useRef(null);
   return (
     <CSSTransition
@@ -25,8 +26,8 @@ export const MobileMenu: React.FC<Props> = ({ isMenuOpen }) => {
       unmountOnExit
     >
       <div ref={nodeRef} className={styles.mobileMenu}>
-        <HeaderNav />
-        <ShoppingTools />
+        <HeaderNav setIsMenuOpen={setIsMenuOpen} />
+        <ShoppingTools setIsMenuOpen={setIsMenuOpen} />
       </div>
     </CSSTransition>
   );

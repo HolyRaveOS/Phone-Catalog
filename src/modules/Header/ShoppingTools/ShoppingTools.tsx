@@ -5,7 +5,11 @@ import { ShoppingCounter } from '../ShoppingCounter';
 import styles from './ShoppingTools.module.scss';
 import classNames from 'classnames';
 
-export const ShoppingTools: React.FC = () => {
+interface Props {
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const ShoppingTools: React.FC<Props> = ({ setIsMenuOpen }) => {
   const getLinkClassNames = ({
     isActive,
     isFavorite = false,
@@ -21,6 +25,7 @@ export const ShoppingTools: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <NavLink
+        onClick={() => setIsMenuOpen(false)}
         to="/favorites"
         className={(props) => getLinkClassNames({ ...props, isFavorite: true })}
       >
@@ -33,7 +38,11 @@ export const ShoppingTools: React.FC = () => {
         </div>
       </NavLink>
 
-      <NavLink to="/cart" className={getLinkClassNames}>
+      <NavLink
+        to="/cart"
+        className={getLinkClassNames}
+        onClick={() => setIsMenuOpen(false)}
+      >
         <div className={styles.iconWrapper}>
           <SpriteIcon iconName="icon-Shopping-bag" className={styles.icon} />
           <ShoppingCounter

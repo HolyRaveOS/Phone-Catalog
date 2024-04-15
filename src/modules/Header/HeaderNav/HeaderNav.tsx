@@ -10,7 +10,11 @@ enum Pages {
   Accessories = '/accessories',
 }
 
-export const HeaderNav: React.FC = () => {
+interface Props {
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const HeaderNav: React.FC<Props> = ({ setIsMenuOpen }) => {
   const setIsActive = ({ isActive }: { isActive: boolean }) =>
     classNames(styles.link, {
       [styles.linkActive]: isActive,
@@ -21,7 +25,11 @@ export const HeaderNav: React.FC = () => {
       <ul className={styles.list}>
         {Object.entries(Pages).map(([key, path]) => (
           <li className={styles.item} key={key}>
-            <NavLink to={path} className={setIsActive}>
+            <NavLink
+              to={path}
+              className={setIsActive}
+              onClick={() => setIsMenuOpen(false)}
+            >
               {key}
             </NavLink>
           </li>
